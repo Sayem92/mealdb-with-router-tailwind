@@ -1,10 +1,11 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useParams } from "react-router-dom";
 import Cover from "../Cover/Cover";
 import Details from "../Details/Details";
 import Home from "../Home/Home";
 import Menu from "../Menu/Menu";
 import Offers from "../Offers/Offers";
-import Rewards from "../Rewards/Rewards";
+import Orders from "../Rewards/Orders/Orders";
+
 
 export const router = createBrowserRouter([
 
@@ -38,7 +39,14 @@ export const router = createBrowserRouter([
         element: <Offers></Offers>
     },
     {
-        path: '/rewards',
-         element: <Rewards></Rewards>
+        path:'/home/orders/:id',
+        loader: async ({params})=>{
+            return fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`)    
+        },
+         element: <Orders></Orders>
     },
+    // {
+    //     path: '/orders',
+    //     element: <Orders></Orders>
+    // }
 ])
